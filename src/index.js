@@ -23,7 +23,7 @@ root.render(
 //    That's how React knows WHERE to input all this content. WHAT is injected is the 
 //    thing passed into the render() function, in this case...'<App/>'!!!
 // 6) This 'App' is imported from another file. In that file it is a function! 
-//    What's returned from that App is what gets rendered.
+//    What's returned from that App is what is rendered.
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
