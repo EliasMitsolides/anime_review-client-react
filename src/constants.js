@@ -1,0 +1,1 @@
+export const ANIME_SHOWS_AND_MOVIES_URL = "http://localhost:3004/animes";
