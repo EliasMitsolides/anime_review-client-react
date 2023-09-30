@@ -1,4 +1,5 @@
 import React from "react";
+import AnimeRow from "./AnimeRow";
 
 //18) ES6 allows specific extraction. If many things passed into a component...
 //  ...you can specify properties params. Need not attirbuteMap.thingOne or ThingTwo
@@ -13,21 +14,22 @@ const AnimeTableComponent = ({animes, deleteAnime, showEditor}) =>
             // 18) Map function iterates over our list we wanna print, calls a function...
             //  ...on each iteration that gives us a reference to each member of the iterable.
             // What's returned from 'map' will be concated iterations.
-            // 19) React wants a 'key' attribute in elements to uniquely identify.
+            // 19) React encourages a 'key' attribute in elements to uniquely identify.
             //  For elements that React will read/write.
             // 20) For components to talk to each other/edit states, pass callback to...
             //  ...child component that it calls to let parent component know 'i frew up'
             animes.map(function(anime, index){
                 return (
-                    <li key={index}>
-                        <a onClick={showEditor} href="#">
-                            {anime.title} 
-                        </a>
-                        <button onClick={() => deleteAnime(anime)}>Delete</button>
-                    </li>
+                    <AnimeRow 
+                        anime={anime} 
+                        showEditor={showEditor}
+                        deleteAnime={deleteAnime}/>
                 )
             })
+            // 36) This went from a beefy return (<li>asdasd</li>) to an animeRow component that...
+            // ...will handle everything in it's own file
             }
+            
         </ul>
     </div>
 export default AnimeTableComponent

@@ -2,7 +2,7 @@ import React from "react";
 import AnimeTableComponent from "../components/AnimeTableComponent";
 import AnimeGridComponent from "../components/AnimeGridComponent";
 import AnimeEditorComponent from "../components/AnimePaneEditor/AnimeEditorComponent"
-import findAllAnimes from "../services/AnimeService";
+import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService";
 
 // 11) Components as functions or classes?. Easier to maintain n test functions.
 //  Buuut if we want to easily remember things, states, use a CLASS.
@@ -39,6 +39,13 @@ class AnimeManagerContainer extends React.Component {
         ]
     }
 
+    //componentDidMount async () => {
+        // If this were async
+        //const retrievedAnimes = await findAllAnimes()
+        //this.setState({
+        //  animes: retrievedAnimes
+        // })
+        //}
     componentDidMount(){
         findAllAnimes()
             .then(retrievedAnimes => this.setState({
@@ -72,27 +79,46 @@ class AnimeManagerContainer extends React.Component {
     //...to an 'event handler' to this function. Event handler means this won't fire UNTIL...
     ///...some specific thing happens. In this case an onClick button event.
     //When passing functions down components we trust it'll be used properly.
-    deleteAnime = (animeToDelete) => this.setState((prevState) =>  {
-        return {
-            animes: prevState
-                .animes
-                .filter(eachAnime => eachAnime.title !== animeToDelete.title)
-                // .filter(function(eachAnime){
-                //     return eachAnime.title !== anime.title
-                // })
-        }
-    })
-
-    addAnime = () => this.setState(prevState => {
-        return ({// the '...' is a spread operator
-            animes: [...prevState.animes, 
-                {   
-                    _id: (new Date().getTime()), 
-                    title: prevState.newAnimeTitle
+    deleteAnime = (animeToDelete) => {
+    deleteAnime(animeToDelete.id)
+        .then(status => {
+            this.setState(prevState =>  {
+                return {
+                    animes: prevState
+                        .animes
+                        .filter(eachAnime => eachAnime.id !== animeToDelete.id)
+                        // .filter(function(eachAnime){
+                        //     return eachAnime.title !== anime.title
+                        // })
                 }
+            })
+        })
+    }
+    // deleteAnime = async (animeToDelete) => 
+    // {
+    //     const deletedAnime = await deleteAnime(animeToDelete.id);
+    //     this.setState(prevState =>  {
+    //         return {
+    //             animes: prevState
+    //                 .animes
+    //                 .filter(eachAnime => eachAnime.id !== animeToDelete.id)
+    //         }
+    //     })
+    // }
+    
+    
+
+    addAnime = () => 
+    createAnime({
+        title: this.state.newAnimeTitle
+    }).then(createdAnime => this.setState(prevState => {
+        return ({// the '...' is a spread operator
+            animes: [
+                ...prevState.animes, 
+                createdAnime
             ] 
         })
-    })
+    }))
     
     //27) This setState usage doesn't have a callback in its param. State history here isn't needed.
     showEditor = () => 
