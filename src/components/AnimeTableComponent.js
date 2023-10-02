@@ -21,6 +21,7 @@ const AnimeTableComponent = ({animes, deleteAnime, showEditor}) =>
             animes.map(function(anime, index){
                 return (
                     <AnimeRow 
+                        key={anime.id}
                         anime={anime} 
                         showEditor={showEditor}
                         deleteAnime={deleteAnime}/>

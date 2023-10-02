@@ -22,7 +22,7 @@ import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService"
 //      This christened React component  will need to override some inherited functions...render!
 // 23) Containers are Components that have a mix of states, event handlers.
 // 30) The React.Component we inherit from have lifecycle functions. When we're being made n' destroyed.
-//      componentDidMount is a method for updating states to reflect something that'll be added to DOM.
+//      componentDidMount is a method for set states for new component instances.
 class AnimeManagerContainer extends React.Component {
     // 13) 'state' variables in React components are no ordinary variable ctrl + click on that 
     //      'state' to see that it's got special properties and such. It's inherited.
@@ -40,7 +40,7 @@ class AnimeManagerContainer extends React.Component {
     }
 
     //componentDidMount async () => {
-        // If this were async
+        //// If this were async
         //const retrievedAnimes = await findAllAnimes()
         //this.setState({
         //  animes: retrievedAnimes
@@ -81,18 +81,25 @@ class AnimeManagerContainer extends React.Component {
     //When passing functions down components we trust it'll be used properly.
     deleteAnime = (animeToDelete) => {
     deleteAnime(animeToDelete.id)
-        .then(status => {
-            this.setState(prevState =>  {
-                return {
-                    animes: prevState
-                        .animes
-                        .filter(eachAnime => eachAnime.id !== animeToDelete.id)
-                        // .filter(function(eachAnime){
-                        //     return eachAnime.title !== anime.title
-                        // })
-                }
-            })
-        })
+        .then(findAllAnimes()
+            .then(retrievedAnimes => this.setState({
+                animes:retrievedAnimes
+            }))
+        )
+
+
+        // .then(status => {
+        //     this.setState(prevState =>  {
+        //         return {
+        //             animes: prevState
+        //                 .animes
+        //                 .filter(eachAnime => eachAnime.id !== animeToDelete.id)
+        //                 // .filter(function(eachAnime){
+        //                 //     return eachAnime.title !== anime.title
+        //                 // })
+        //         }
+        //     })
+        // })
     }
     // deleteAnime = async (animeToDelete) => 
     // {
@@ -121,6 +128,7 @@ class AnimeManagerContainer extends React.Component {
     }))
     
     //27) This setState usage doesn't have a callback in its param. State history here isn't needed.
+    // 39) Redux.js and hooks fix "drilling". Passing functionalities down and up components.
     showEditor = () => 
         this.setState({
             showEditor: true
@@ -139,12 +147,13 @@ class AnimeManagerContainer extends React.Component {
     }
     
 
-    //Whatever React's 'render' would return is overriden by what's typed in the JS return
-    //15) Provide only a reference to a function we want used in render. 
+    //Whatever React's 'render' would return is overriden by what's typed in the JS return.
+    //render is one of many lifecycle functions that React calls at diff points in component activity.
+    // 15) Provide only a reference to a function we want used in render. 
     //    If arguments and thus parenthesis are needed, put it in a lambda.
-    //16) While calling a component for React, you can pass references to state variables
+    // 16) While calling a component for React, you can pass references to state variables
     //      into that call. That component will have what it needs thanks to parent component.
-    //21) React events are written in camelCase, unlike HTMLS all lowercase...onClick<->onclick
+    // 21) React events are written in camelCase, unlike HTMLS all lowercase...onClick<->onclick
     //      arguments in React event handlers need arrowfunctions...it fires
     render(){
         return (

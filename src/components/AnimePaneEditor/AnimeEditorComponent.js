@@ -2,10 +2,14 @@ import React from "react";
 import BigBucketListComponent from "./BigBucketListComponent";
 import MediumBucketListComponent from "./MediumBucketListComponent";
 import SmallBucketListComponent from "./SmallBucketListComponent";
+import './AnimeEditor.css';
 
-//24) ()'s are needed when the return will have more than one thing
+// 38) Some React users will have 1 .css file for each component, when marking up.
+//  Angular forces that convention.
+
+// 24) ()'s are needed when the return will have more than one thing
 //  'return's are needed when you're not in an arrow function
-//25) Abstraction of, here, Big Buckets into a component allows parameterization
+// 25) Abstraction of, here, Big Buckets into a component allows parameterization
 //  can pass things into a Big Bucket component that I couldn't with just one page
 const AnimeEditorComponent = ({hideEditor}) => 
     <div>
