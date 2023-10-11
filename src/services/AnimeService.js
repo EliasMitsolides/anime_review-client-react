@@ -46,3 +46,15 @@ export const createAnime = (animeToCreate) =>
             'content-type': 'application/json' // let server know content is JSON
         }
     }).then(response => response.json()) // server responds with actual body, we parse it into JSON
+
+export const updateAnime = async (animeID, animeToUpdate) => {
+    const response = await fetch(`${API_URL}/${animeID}`, {
+        method: 'PUT',
+        body: JSON.stringify(animeToUpdate),
+        headers: {
+            'content-type': 'application/json'
+        }
+
+    })
+    return await response.json() 
+}

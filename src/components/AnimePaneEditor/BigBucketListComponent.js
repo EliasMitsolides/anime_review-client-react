@@ -1,8 +1,8 @@
 import React from 'react';
 import BigBucketListItem from './BigBucketListItem';
 
-// 26) Again, these curly braces are JS resolving + returning whats passed into it.
-//  When curlies in JS aren't being used as method bodies for function, they'll do the above.
+// 26) Again, these curly braces are JSX resolving + returning whats passed into it.
+//  When curlies in JSX aren't being used as method bodies for function, they'll do the above.
 const BigBucketListComponent = ({bigBucket}) => 
     <ul>
         {bigBucket.map(eachBucket => 

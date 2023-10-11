@@ -3,6 +3,13 @@ import AnimeTableComponent from "../components/AnimeTableComponent";
 import AnimeGridComponent from "../components/AnimeGridComponent";
 import AnimeEditorComponent from "../components/AnimePaneEditor/AnimeEditorComponent"
 import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService";
+import Page1 from "../components/Page1";
+import Page2 from "../components/Page2";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// 43) BrowserRouter specifies an area where for browser navigation implementation.
+// 44) Route used to have a 'component' attribute that's now 'children'. Requires...
+//  ... a variable (JS through JSX curlies). Also in r-r-d v6 is 'Routes' components
+//  ... to use over 'Switch' components.
 
 // 11) Components as functions or classes?. Easier to maintain n test functions.
 //  Buuut if we want to easily remember things, states, use a CLASS.
@@ -60,7 +67,7 @@ class AnimeManagerContainer extends React.Component {
     //15) React maintains a virtual DOM where all updates changes, real DOM updates are expensive.
     //  this.setState triggers a re-rendering...is how React knows to refresh virtual DOM
     //  the curly brackets indicate a codeblock for this arrow function, gotta explicitly return
-    //16) .setState() knows to only change what's returned into our 'state' variable.
+    //16) .prevState() knows to only change what's returned into our 'state' variable.
     toggle = () => this.setState(prevState => {
         if (prevState.layout === 'table'){ // === means equal with no type changing
             return ({ //it goes ({ }) bcuz we want to return the {} object itself
@@ -153,12 +160,16 @@ class AnimeManagerContainer extends React.Component {
     //    If arguments and thus parenthesis are needed, put it in a lambda.
     // 16) While calling a component for React, you can pass references to state variables
     //      into that call. That component will have what it needs thanks to parent component.
-    // 21) React events are written in camelCase, unlike HTMLS all lowercase...onClick<->onclick
+    // 21) React events are written in camelCase, unlike HTMLs all lowercase...onClick<->onclick
     //      arguments in React event handlers need arrowfunctions...it fires
     render(){
         return (
             <div>
                 <h1>Anime Manager</h1>
+                <Router>
+                    <Route path="/page1" children={Page1}></Route>
+                    <Route path="/page2" children={Page2}></Route>
+                </Router>
 
                 {
                     this.state.showEditor === true &&
