@@ -5,7 +5,7 @@ import AnimeEditorComponent from "../components/AnimePaneEditor/AnimeEditorCompo
 import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService";
 import Page1 from "../components/Page1";
 import Page2 from "../components/Page2";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // 43) BrowserRouter specifies an area where for browser navigation implementation.
 // 44) Route used to have a 'component' attribute that's now 'element'. Requires...
 //  ... a variable (JS through JSX curlies). Also in r-r-d v6 is 'Routes' components
@@ -162,25 +162,31 @@ class AnimeManagerContainer extends React.Component {
     //      into that call. That component will have what it needs thanks to parent component.
     // 21) React events are written in camelCase, unlike HTMLs all lowercase...onClick<->onclick
     //      arguments in React event handlers need arrowfunctions...it fires
+    // 45) React-Router-DOM's Router n stuff listens for changes in URL and changes what...
+    //  ...we should see based on the URL changes. URL encoding allows state reconstruction!
     render(){
         return (
             <div>
                 <h1>Anime Manager</h1>
-                <Router>
+                {/* <Router>
+                    <Link to="/page1">
+                        Page 1
+                    </Link>
+                    <Link to="/page2">
+                        Page 2
+                    </Link>
                     <Routes>
-                        <Route path="page1" element={<Page1/>}/>
-                        <Route path="page2" element={<Page2/>}/>
+                        <Route path="/page1" element={<Page1/>}/>
+
+                        <Route path="/page2" element={<Page2/>}>
+                            <Route path="/page2/:message" element={<Page2/>}/>
+                        </Route>
                     </Routes>
-                    
-                </Router>
+                </Router> */}
 
-                {
-                    this.state.showEditor === true &&
                     <AnimeEditorComponent hideEditor = {this.hideEditor}/>
-                }
-
-                {
-                    this.state.showEditor === false &&
+               
+                    
                     <div>
                         <button onClick={this.toggle}>Toggle</button>
                         <input onChange={(e) => this.updateForm({
