@@ -6,6 +6,7 @@ import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService"
 import Page1 from "../components/Page1";
 import Page2 from "../components/Page2";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import AnimeListComponent from "../components/AnimeListComponent";
 // 43) BrowserRouter specifies an area where for browser navigation implementation.
 // 44) Route used to have a 'component' attribute that's now 'element'. Requires...
 //  ... a variable (JS through JSX curlies). Also in r-r-d v6 is 'Routes' components
@@ -187,25 +188,16 @@ class AnimeManagerContainer extends React.Component {
                     <AnimeEditorComponent hideEditor = {this.hideEditor}/>
                
                     
-                    <div>
-                        <button onClick={this.toggle}>Toggle</button>
-                        <input onChange={(e) => this.updateForm({
-                            newAnimeTitle: e.target.value
-                        })} 
-                            value={this.state.newAnimeTitle}/>
-                        <button onClick={this.addAnime}>Add Anime</button>
-
-                        {this.state.layout === 'table' &&   //Drop the ()'s from function to pass the event handler
-                        <AnimeTableComponent 
-                            showEditor = {this.showEditor}
-                            animes={this.state.animes} 
-                            deleteAnime={this.deleteAnime}/>} 
-                        {this.state.layout === 'grid' && 
-                        <AnimeGridComponent 
-                            animes={this.state.animes} 
-                            deleteAnime={this.deleteAnime}/>} 
-                    </div>
-                }
+                    <AnimeListComponent
+                    toggle={this.toggle}
+                    updateForm={this.updateForm}
+                    newAnimeTitle={this.state.newAnimeTitle}
+                    addAnime={this.addAnime}
+                    deleteAnime={this.deleteAnime}
+                    layout={this.state.layout}
+                    showEditor={this.showEditor}
+                    animes={this.state.animes}/>
+                
 
                 
             </div>
