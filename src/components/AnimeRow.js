@@ -1,5 +1,6 @@
 import React from "react";
 import { updateAnime } from "../services/AnimeService";
+import { Link } from "react-router-dom";
 
 class AnimeRow extends React.Component { //  = ({anime, showEditor, deleteAnime}) => 
     // 40) The map of values are stored in this parent constructor & passed into super.
@@ -18,9 +19,12 @@ class AnimeRow extends React.Component { //  = ({anime, showEditor, deleteAnime}
         return(
             <li>
             {this.state.editing === false && 
-            <a onClick={this.props.showEditor} href="#">
+            //To use the anime ID in the Link's 'to' attribute, can append through JS...
+            // ...functionality with the JSX curly braces and JS template literals...
+            // ...as the alternative to typical + + + string concatenation ${expression}
+            <Link to={`/anime-editor/${this.props.anime.id}`}>
                 {this.state.anime.title} 
-            </a>}
+            </Link>}
             
             {this.state.editing && 
             <input 

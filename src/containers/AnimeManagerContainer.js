@@ -31,6 +31,9 @@ import AnimeListComponent from "../components/AnimeListComponent";
 // 23) Containers are Components that have a mix of states, event handlers.
 // 30) The React.Component we inherit from have lifecycle functions. When we're being made n' destroyed.
 //      componentDidMount is a method for set states for new component instances.
+// 47) Alternative way where component are stateless but have a state...
+//  ... maintained through Redux. Intercomponent communication is Redux.
+//  There's Redux and React-Redux. Redux is the core library.
 class AnimeManagerContainer extends React.Component {
     // 13) 'state' variables in React components are no ordinary variable ctrl + click on that 
     //      'state' to see that it's got special properties and such. It's inherited.
@@ -185,21 +188,28 @@ class AnimeManagerContainer extends React.Component {
                     </Routes>
                 </Router> */}
 
-                    <AnimeEditorComponent hideEditor = {this.hideEditor}/>
-               
-                    
-                    <AnimeListComponent
-                    toggle={this.toggle}
-                    updateForm={this.updateForm}
-                    newAnimeTitle={this.state.newAnimeTitle}
-                    addAnime={this.addAnime}
-                    deleteAnime={this.deleteAnime}
-                    layout={this.state.layout}
-                    showEditor={this.showEditor}
-                    animes={this.state.animes}/>
-                
+                <Router>
+                    <Routes>
+                        <Route path="/anime-editor/:animeID" element = {
+                            <AnimeEditorComponent
+                                //animeID={this.props.match.params.animeID}
+                                hideEditor={this.hideEditor}/>}
+                        />
+                        {/* If a component is a default, what you normally see, make it's path blank */}
+                        <Route path="/" element = {
+                            <AnimeListComponent
+                                toggle={this.toggle}
+                                updateForm={this.updateForm}
+                                newAnimeTitle={this.state.newAnimeTitle}
+                                addAnime={this.addAnime}
+                                deleteAnime={this.deleteAnime}
+                                layout={this.state.layout}
+                                showEditor={this.showEditor}
+                                animes={this.state.animes}/>}
+                        />
+                    </Routes>
 
-                
+                </Router>
             </div>
         )
     }

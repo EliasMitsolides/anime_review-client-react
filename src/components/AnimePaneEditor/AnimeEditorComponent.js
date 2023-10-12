@@ -3,6 +3,7 @@ import BigBucketListComponent from "./BigBucketListComponent";
 import MediumBucketListComponent from "./MediumBucketListComponent";
 import SmallBucketListComponent from "./SmallBucketListComponent";
 import './AnimeEditor.css';
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // 38) Some React users will have 1 .css file for each component, when marking up.
 //  Angular forces that convention.
@@ -11,9 +12,15 @@ import './AnimeEditor.css';
 //  'return's are needed when you're not in an arrow function
 // 25) Abstraction of, here, Big Buckets into a component allows parameterization
 //  can pass things into a Big Bucket component that I couldn't with just one page
-const AnimeEditorComponent = ({hideEditor}) => 
-    <div>
-        <h3>Anime Editor</h3>
+const AnimeEditorComponent = ({hideEditor}) => {
+    const { animeID } = useParams();
+    const history = useNavigate()
+    return  <div>
+        {/* <Link to="/">
+            Back
+        </Link> */}
+        <button onClick={() => {history("/")}}>Back</button>
+        <h3>Anime Editor {animeID}</h3>
         <button onClick={hideEditor}>Close</button>
 
         <div className="row">
@@ -30,10 +37,9 @@ const AnimeEditorComponent = ({hideEditor}) =>
                 <SmallBucketListComponent/>
             </div>
         </div>
-    
-    
-
     </div>
+    
+}
     
 
 export default AnimeEditorComponent

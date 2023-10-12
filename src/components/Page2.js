@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 //  Back then, you would do "{match, history}" in the arrow bracket. Which would...
 //  ...pass results from URL patterns.
 //  In v6, we use hooks like 'useParams()' to get what was passed to us. 
+//  'useParams()' will get attrs passed into the component called & from URL parsing.
 //  'useNavigate' for what was {history} to programatically navigate pages.
 //  Which is to say, perform an algorithm and at the end navigate to diff pages.
 //  'useNavigate' represents browser history, as we change URLs, browser will keep...
