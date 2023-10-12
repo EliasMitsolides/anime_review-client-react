@@ -5,11 +5,11 @@ import AnimeEditorComponent from "../components/AnimePaneEditor/AnimeEditorCompo
 import {findAllAnimes, deleteAnime, createAnime} from "../services/AnimeService";
 import Page1 from "../components/Page1";
 import Page2 from "../components/Page2";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // 43) BrowserRouter specifies an area where for browser navigation implementation.
-// 44) Route used to have a 'component' attribute that's now 'children'. Requires...
+// 44) Route used to have a 'component' attribute that's now 'element'. Requires...
 //  ... a variable (JS through JSX curlies). Also in r-r-d v6 is 'Routes' components
-//  ... to use over 'Switch' components.
+//  ... to use over 'Switch' components. Use 'component' only if in RouterProvider parent element.
 
 // 11) Components as functions or classes?. Easier to maintain n test functions.
 //  Buuut if we want to easily remember things, states, use a CLASS.
@@ -167,8 +167,11 @@ class AnimeManagerContainer extends React.Component {
             <div>
                 <h1>Anime Manager</h1>
                 <Router>
-                    <Route path="/page1" children={Page1}></Route>
-                    <Route path="/page2" children={Page2}></Route>
+                    <Routes>
+                        <Route path="page1" element={<Page1/>}/>
+                        <Route path="page2" element={<Page2/>}/>
+                    </Routes>
+                    
                 </Router>
 
                 {
