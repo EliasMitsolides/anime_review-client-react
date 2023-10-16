@@ -7,6 +7,7 @@ import Page1 from "../components/Page1";
 import Page2 from "../components/Page2";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import AnimeListComponent from "../components/AnimeListComponent";
+
 // 43) BrowserRouter specifies an area where for browser navigation implementation.
 // 44) Route used to have a 'component' attribute that's now 'element'. Requires...
 //  ... a variable (JS through JSX curlies). Also in r-r-d v6 is 'Routes' components
@@ -33,7 +34,12 @@ import AnimeListComponent from "../components/AnimeListComponent";
 //      componentDidMount is a method for set states for new component instances.
 // 47) Alternative way where component are stateless but have a state...
 //  ... maintained through Redux. Intercomponent communication is Redux.
-//  There's Redux and React-Redux. Redux is the core library.
+//  There's Redux Toolkit and React-Redux. Redux Toolkit has the core library.
+//  The core library's behavior is maintaining Finite State Machines, where...
+//  ...an action determines which state amongst many will be the new current state.
+
+
+
 class AnimeManagerContainer extends React.Component {
     // 13) 'state' variables in React components are no ordinary variable ctrl + click on that 
     //      'state' to see that it's got special properties and such. It's inherited.
@@ -41,7 +47,7 @@ class AnimeManagerContainer extends React.Component {
     state = {
         layout: 'table',
         showEditor: false,
-        newAnimeTitle: "Mama Luigi",
+        newAnimeTitle: "Zombie 100",
         animes: [
             {_id: '123', title: 'Anime A'},
             {_id: '234', title: 'Anime B'},
