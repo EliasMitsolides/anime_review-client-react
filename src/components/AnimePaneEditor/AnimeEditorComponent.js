@@ -13,7 +13,8 @@ import bigBucketReducer from "../../reducers/bigBucketReducer";
 
 // 50) Redux: 'configureStore' will keep track of any state ever created. Store's job.
 //  This application level 'store'/'state' can be PROVIDED to rest of app w/ Provider tag.
-//  A new state is created from the old state that is catalogued and retrievable (undo).
+//  Reducer's manage n create new states, w/ old states as context, that are
+//  catalogued and retrievable (undo).
 const store = configureStore({
     reducer: bigBucketReducer,
     // preloadedState: initialState
@@ -36,7 +37,7 @@ const AnimeEditorComponent = ({hideEditor}) => {
 
         <div className="row">
             <div className="col-4">
-                <BigBucketListComponent
+                <BigBucketListComponent animeID={animeID}
                 // bigBucket={[
                 //     {_id:"123", title: "CSS"},
                 //     {_id:"234", title: "HTML"},
